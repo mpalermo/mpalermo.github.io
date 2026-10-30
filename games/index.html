@@ -7,33 +7,118 @@
 <meta name="description" content="Games by Matt Palermo, playable in your browser.">
 <style>
   :root {
-    --bg: #0f1420; --card: #1a2133; --text: #e8ecf5; --muted: #8f9ab3;
-    --accent: #4ade80; --border: #2a3450;
+    --bg: #f8fafc;
+    --bg-grad: radial-gradient(1200px 600px at 80% -10%, #e0f2fe 0%, transparent 60%), radial-gradient(800px 500px at -10% 20%, #fef3c7 0%, transparent 55%);
+    --card: #ffffff;
+    --text: #0f172a;
+    --muted: #475569;
+    --accent: #0ea5e9;
+    --accent-soft: #e0f2fe;
+    --border: #e2e8f0;
+    --shadow: 0 10px 25px rgba(15,23,42,0.08);
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--text);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.5; }
-  header, main, footer { max-width: 960px; margin: 0 auto; padding: 0 16px; }
-  header { padding-top: 48px; padding-bottom: 8px; }
-  h1 { margin: 0 0 4px; font-size: clamp(2rem, 6vw, 3rem); }
-  header p { margin: 0; color: var(--muted); }
-  .grid { display: grid; gap: 16px; margin: 32px auto; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px;
-    display: flex; flex-direction: column; gap: 8px; color: inherit; text-decoration: none; transition: transform .15s, border-color .15s; }
-  a.card:hover, a.card:focus-visible { transform: translateY(-3px); border-color: var(--accent); outline: none; }
-  .card h2 { margin: 0; font-size: 1.3rem; }
-  .card p { margin: 0; color: var(--muted); flex: 1; }
-  .tag { align-self: flex-start; font-size: .75rem; font-weight: 600; padding: 2px 10px; border-radius: 999px;
-    background: rgba(74,222,128,.15); color: var(--accent); }
-  .soon { opacity: .7; }
-  .soon .tag { background: rgba(143,154,179,.18); color: var(--muted); }
-  footer { color: var(--muted); font-size: .85rem; padding-bottom: 32px; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg-grad), var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  header, main, footer { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+  header {
+    padding-top: 72px;
+    padding-bottom: 24px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 8px;
+  }
+  .logo {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), #22c55e);
+    box-shadow: 0 4px 12px rgba(14,165,233,0.35);
+  }
+  h1 {
+    margin: 0;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  header p {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+  }
+  .grid {
+    display: grid;
+    gap: 24px;
+    margin: 40px auto 80px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+    display: flex; flex-direction: column; gap: 10px;
+    color: inherit; text-decoration: none;
+    box-shadow: var(--shadow);
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  a.card:hover, a.card:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 35px rgba(15,23,42,0.12);
+    border-color: var(--accent);
+    outline: none;
+  }
+  .card h2 {
+    margin: 4px 0 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  .card p {
+    margin: 0;
+    color: var(--muted);
+    flex: 1;
+  }
+  .tag {
+    align-self: flex-start;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: #0369a1;
+  }
+  .soon {
+    opacity: .85;
+  }
+  .soon .tag {
+    background: #f1f5f9;
+    color: #64748b;
+  }
+  .meta {
+    margin-top: 8px;
+    font-size: .85rem;
+    color: #64748b;
+  }
+  footer {
+    color: var(--muted);
+    font-size: .85rem;
+    padding-bottom: 48px;
+  }
 </style>
 </head>
 <body>
 <header>
-  <h1>Games</h1>
-  <p>Built with Godot. Play right in your browser.</p>
+  <div class="brand">
+    <div class="logo" aria-hidden="true"></div>
+    <h1>Games</h1>
+  </div>
 </header>
 <main>
   <div class="grid">
@@ -41,19 +126,22 @@
       <span class="tag">Playable</span>
       <h2>SimBall</h2>
       <p>Run a baseball club as its GM. Draft, trade, sign free agents and build your farm system, then chase a title season after season.</p>
+      <div class="meta">Baseball • Management Sim</div>
     </a>
     <a class="card" href="simkings/">
       <span class="tag">Playable</span>
       <h2>SimKings</h2>
       <p>Rule a small medieval realm for generations: raise heirs, scheme at court, and lead your banners to war.</p>
+      <div class="meta">Medieval • Dynasty Sim</div>
     </a>
     <div class="card soon" aria-disabled="true">
       <span class="tag">Coming soon</span>
       <h2>Baseball RPG</h2>
-      <p>A baseball role-playing game. Stay tuned.</p>
+      <p>A baseball role-playing game with story, progression and season arcs. Stay tuned.</p>
+      <div class="meta">RPG • In development</div>
     </div>
   </div>
 </main>
-<footer>&copy; Matt Palermo</footer>
+<footer>&copy; 2026 Matt Palermo. All rights reserved.</footer>
 </body>
 </html>
